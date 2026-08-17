@@ -20,6 +20,14 @@ if H[Ch] then
 end
 
 local teamColor = (v.Team and v.Team.TeamColor and v.Team.TeamColor.Color) or Color3.new(1,1,1)
+
+-- Remplissage rendu plus clair (mélange avec du blanc)
+local fillColor = Color3.new(
+    math.min(1, teamColor.R + (1 - teamColor.R) * 0.4),
+    math.min(1, teamColor.G + (1 - teamColor.G) * 0.4),
+    math.min(1, teamColor.B + (1 - teamColor.B) * 0.4)
+)
+
 local outCol
 if teamColor.R > 0.9 and teamColor.G > 0.9 and teamColor.B > 0.9 then
 outCol = Color3.new(0, 0, 0)
@@ -27,7 +35,6 @@ else
 outCol = Color3.new(teamColor.R * 0.25, teamColor.G * 0.25, teamColor.B * 0.25)
 end
 
--- Premier Highlight (pour l'épaisseur de l'outline)
 local Hl1=Instance.new("Highlight")
 Hl1.Adornee=Ch
 Hl1.FillTransparency=1
@@ -37,10 +44,9 @@ Hl1.DepthMode=Enum.HighlightDepthMode.AlwaysOnTop
 Hl1.Enabled=S
 Hl1.Parent=Ch
 
--- Second Highlight (pour le remplissage et doubler l'effet d'outline)
 local Hl2=Instance.new("Highlight")
 Hl2.Adornee=Ch
-Hl2.FillColor=teamColor
+Hl2.FillColor=fillColor
 Hl2.FillTransparency=0.2
 Hl2.OutlineColor=outCol
 Hl2.OutlineTransparency=0
