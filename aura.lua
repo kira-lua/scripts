@@ -13,13 +13,17 @@ if H[Ch] then H[Ch]:Destroy() H[Ch]=nil end
 local Hl=Instance.new("Highlight")
 Hl.Adornee=Ch
 
--- Récupération de la couleur de l'équipe (blanc par défaut si aucune équipe)
 local teamColor = (v.Team and v.Team.TeamColor and v.Team.TeamColor.Color) or Color3.new(1,1,1)
 
 Hl.FillColor = teamColor
 Hl.FillTransparency=0.2
--- Version plus foncée pour l'outline (multiplié par 0.5 pour assombrir)
-Hl.OutlineColor = Color3.new(teamColor.R * 0.5, teamColor.G * 0.5, teamColor.B * 0.5)
+
+if teamColor.R > 0.9 and teamColor.G > 0.9 and teamColor.B > 0.9 then
+Hl.OutlineColor = Color3.new(0, 0, 0)
+else
+Hl.OutlineColor = Color3.new(teamColor.R * 0.25, teamColor.G * 0.25, teamColor.B * 0.25)
+end
+
 Hl.OutlineTransparency=0
 Hl.DepthMode=Enum.HighlightDepthMode.AlwaysOnTop
 Hl.Enabled=S
